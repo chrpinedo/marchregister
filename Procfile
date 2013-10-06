@@ -1,1 +1,0 @@
-web: gunicorn marchregister:app
