@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block body %}
+	<h2>Nuevo registro</h2>
+	{% if request.method == 'GET'%}
+		<form action="{{ url_for('register') }}" method=post class=add-entry>
+			<label for=name>Nombre</label>:
+			<input type=text id=name name=name required>
+			<label for=first_lastname>Primer apellido</label>:
+			<input type=text id=firts_lastname name=first_lastname required>
+			<label for=second_lastname>Segundo apellido</label>:
+			<input type=text id=second_lastname name=second_lastname required>
+			<label for=id_number>NIF</label> <span class=example>(por ejemplo, 12345678A)</span>:
+			<input type=text id=id_number name=id_number required oninput="validate_id_number(this)">
+			<label for=re_id_number>Vuelva a introducir el NIF</label> <span class=example>(por ejemplo, 12345678A)</span>:
+			<input type=text id=id_number name=re_id_number required oninput="check_id_number(this)">
+			<label for=settlement>Población</label>:
+			<input type=text id=settlement name=settlement required>
+			<label for=province>Provincia</label>:
+			<input type=text id=province name=province list=provinces required>
+			<datalist id=provinces>
+				<option value=Araba>
+				<option value=Bizkaia>
+				<option value=Gipuzkoa>
+				<option value=Nafarroa>
+				<option value=Lapurdi>
+				<option value=Nafarroa-Beherea>
+				<option value=Zuberoa>
+			</datalist>
+			<label for=sex>Sexo</label>
+			<select id=sex name=sex required>
+				<option value="man" selected>Hombre</option>
+				<option value="woman">Mujer</option>
+			</select>
+			<label for=federated>Federado</label>:
+			<select id=federated name=federated required>
+				<option value="yes">Si</option>
+				<option value="no" selected>No</option>
+			</select>
+			<label for=club>Club de Montaña</label> <span class=example>(solo si se pertenece a alguno)</span>:
+			<input type=text id=club name=club>
+			<label for=email>E-mail</label>:
+			<input type=text id=email name=email required oninput="validate_email(this)">
+			<label for=re_email>Vuelva a introducir el E-mail</label>:
+			<input type=text id=re_email name=re_email required oninput="check_email(this)">
+			<label for=born_date>Fecha de nacimiento</label> <span class=example>(por ejemplo, 31-12-1990)</span>:
+			<input type=text id=born_date name=born_date required oninput="validate_born_date(this)">
+			<input type=submit value=Enviar>
+		  </dl>
+		</form>
+  {% endif %}
+{% endblock %}

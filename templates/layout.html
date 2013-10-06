@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+	<title>{{ config['HTML_TITLE'] }}</title>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+	<div class=page>
+	  <h1>{{ config['HTML_TITLE'] }}</h1>
+	  <div class=metanav>
+		<a href="{{ url_for('register') }}">Nuevo registro</a>
+		<a href="{{ url_for('list') }}">Lista de participantes</a>
+	  </div>
+	  {% for message in get_flashed_messages() %}
+		<div class=flash>{{ message }}</div>
+	  {% endfor %}
+	  {% block body %}{% endblock %}
+	</div>
+</body>
+</html>

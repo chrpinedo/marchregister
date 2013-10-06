@@ -1,0 +1,35 @@
+body            { 
+	width:600px;
+	margin: 20px auto;
+	font-family: sans-serif; 
+	background: #ffff99; }
+h1, h2          { font-family: 'Helvetia', serif; text-align: center;}
+
+.metanav {
+	text-align: center;
+}
+
+input:invalid { 
+	background: #FFE4E1;
+}
+
+input:required {
+	border-color: #ff0000;
+}
+
+input {
+  display:block;
+}
+select {
+  display:block;
+}
+
+table {
+ border-collapse:collapse;
+}
+table, th, td {
+ border: 1px solid black;
+}
+td, th {
+ padding:15px;
+}
