@@ -1,21 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>{{ config['HTML_TITLE'] }}</title>
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	{% block head %}
+	<meta charset="UTF-8">
+	<title>{{ config['HTML_TITLE'] }} {% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 	<script src="{{ url_for('static', filename='script.js') }}"></script>
+	{% endblock %}
 </head>
 <body>
-	<div class=page>
-	  <h1>{{ config['HTML_TITLE'] }}</h1>
-	  <div class=metanav>
-		<a href="{{ url_for('register') }}">Nuevo registro</a>
-		<a href="{{ url_for('list') }}">Lista de participantes</a>
-	  </div>
-	  {% for message in get_flashed_messages() %}
-		<div class=flash>{{ message }}</div>
-	  {% endfor %}
-	  {% block body %}{% endblock %}
+	<div class="page">
+		<header>
+			{% block header %}
+			<h1>{{ config['HTML_TITLE'] }}</h1>
+			{% endblock %}
+		</header>
+		<nav>
+			<a href="{{ url_for('register') }}">Nuevo registro</a> //
+			<a href="{{ url_for('list') }}">Lista de participantes</a>
+		</nav>
+		<div class="content">
+			{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+			<div class="flashes">
+			{% for category, message in messages %}
+				<div class="{{ category }}">{{ message }}</div>
+			{% endfor %}
+			</div>
+			{% endif %}
+			{% endwith %}
+			{% block content %}{% endblock %}
+		</div>
+		<footer>
+			{% block footer %}
+			<address>Mendiko Lagunak M.T.<br>
+			<a href="http://mendikolagunak.blogspot.com">http://mendikolagunak.blogspot.com</a> | <a
+				href="mailto:mendikolagunak@mendikolagunak.com">mendikolagunak@mendikolagunak.com</a>
+			</address>
+			{% endblock %}
+		</footer>
 	</div>
 </body>
 </html>

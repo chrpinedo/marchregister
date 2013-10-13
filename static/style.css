@@ -1,35 +1,83 @@
-body            { 
-	width:600px;
+body { 
+	font-family: serif; 
+	font-size: 100%;
+	background-color: #ffff99;
+}
+div.page {
+	width:700px;
 	margin: 20px auto;
-	font-family: sans-serif; 
-	background: #ffff99; }
-h1, h2          { font-family: 'Helvetia', serif; text-align: center;}
-
-.metanav {
+	padding: 20px;
+	background-color: #F8F8F8;
+}
+header {
+	text-align: center;
+	font-family: 'Helvetica', 'Arial', serif;
+}
+header h1 {
+	color: #FF8C00;
+	font-size: 3em;
+}
+header h2 {
+	color: #FF8C00;
+	font-size: 1.875rm;
+}
+nav {
+	text-align: center;
+	font-style: italic;
+	padding: 10px;
+}
+div.content {
+	padding: 10px;
+}
+footer {
+	margin-top:10px;
+	padding:10px;
+	border-top-style: solid;
+	border-width: thin;
 	text-align: center;
 }
-
-input:invalid { 
+div.flashes div.message {
+	background-color: green;
+	font-weight: bold;
+	text-align: center;
+	padding: 20px;
+}
+div.flashes div.error {
+	background-color: red;
+	font-weight: bold;
+	text-align: center;
+	padding: 20px;
+}
+/* Form */
+form.register input:invalid { 
 	background: #FFE4E1;
 }
-
-input:required {
+form.register input:required {
 	border-color: #ff0000;
 }
-
-input {
+form.register input {
   display:block;
 }
-select {
+form.register select {
   display:block;
 }
-
+form.register p.lopd {
+	font-style: italic;
+	font-size: 0.90em;
+}
+/* List registers */
 table {
- border-collapse:collapse;
+	border-collapse:collapse;
+	width: 100%;
 }
 table, th, td {
- border: 1px solid black;
+	border: 1px solid black;
+}
+th
+{
+	background-color:black;
+	color:white;
 }
 td, th {
- padding:15px;
+	padding: 5px;
 }

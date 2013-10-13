@@ -134,8 +134,9 @@ def register():
         matches = query_db('select * from entries where id_number = ?', 
                            [entry['id_number']])
         if matches:
-            flash('Error. El usuario ya esta registrado con numero de dorsal %s ' % (matches[0]['number']))
-            return render_template('layout.html')
+            flash(u'El usuario ya esta registrado con número de dorsal %s' %
+                    (matches[0]['number']), 'error')
+            return render_template('registered.html')
         cur = g.db.execute('insert into entries (name, first_lastname, '
                      'second_lastname, id_number, settlement, province, sex, '
                      'federated, club, email, born_date) values (?, ?, ?, ?, '
@@ -147,12 +148,8 @@ def register():
         g.db.commit()
         matches = query_db('select * from entries where id_number = ?', 
                            [entry['id_number']])
-        flash('Registrado con numero de dorsal %s ' % (matches[0]['number']))
-        return render_template('layout.html')
-
-@app.route('/registered', methods=['GET'])
-def registered():
-    pass
+        flash(u'Registrado con número de dorsal %s' % (matches[0]['number']))
+        return render_template('registered.html')
 
 @app.route('/list')
 def list():
@@ -182,7 +179,7 @@ def download():
             return send_file(csvf, as_attachment=True,
                              attachment_filename="registros.csv")
         else:
-            flash('Error. Usuario y/o clave incorrecta.')
+            flash(u'Usuario y/o contraseña incorrecta', 'error')
             return redirect(url_for('download'))
 
 

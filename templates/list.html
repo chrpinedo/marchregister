@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
-{% block body %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
 	<h2>Lista de participantes</h2>
+{% endblock %}
+{% block content %}
 	<table>
 	<tr>
 	<th>Número de dorsal</th>

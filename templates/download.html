@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
-{% block body %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block header %}
+	{{ super() }}
 	<h2>Descarga de la Lista de participantes</h2>
+{% endblock %}
+{% block content %}
 		<form action="{{ url_for('download') }}" method=post class=add-entry>
 			<label for=username>Usuario:</label>
 			<input type=text id=username name=username>
