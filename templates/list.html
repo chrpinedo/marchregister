@@ -4,15 +4,15 @@
 {% endblock %}
 {% block header %}
 	{{ super() }}
-	<h2>Lista de participantes</h2>
+	<h2>Partehartzaileen zerrenda</h2>
 {% endblock %}
 {% block content %}
 	<table>
 	<tr>
-	<th>Número de dorsal</th>
-	<th>Nombre</th>
-	<th>Primer Apellido</th>
-	<th>Segundo Apellido</th>
+	<th><span class="eu">Patruila zenbakia</span> / <span class="es">Número patrulla</span></th>
+	<th><span class="eu">Izena</span> / <span class="es">Nombre</span></th>
+	<th><span class="eu">Lehenengo abizena</span> / <span class="es">Primer apellido</span></th>
+	<th><span class="eu">Bigarren abizena</span> / <span class="es">Segundo apellido</span></th>
 	</tr>
 	{% for entry in entries %}
 	<tr>

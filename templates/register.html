@@ -4,33 +4,52 @@
 {% endblock %}
 {% block header %}
 	{{ super() }}
-	<h2>Nuevo registro</h2>
+	<h2>Inskripzio berria</h2>
 {% endblock %}
 {% block content %}
 		<form action="{{ url_for('register') }}" method="post" class="register">
-			<p>
-				Para participar en la marcha Gorobel Ibilaldia 2014 es
-				imprescindible realizar el registro en esta página web y
-				posteriormente realizar el ingreso de XX€ (o YY€ en caso de ser
-				socio de Mendiko Lagunak) en el número de cuenta de Mendiko
-				Lagunak xxxxxxxxxxxxxxxxxx de la Caja Laboral. El resguardo del ingreso
-				deberá presentarse para recibir la acreditación de
-				participación en la marcha.
-			</p>
-			<p><strong>Registro abierto hasta el XX/YY/ZZ 00:00</strong></p>
-			<label for="name">Nombre:</label>
+			<p><span class="eu">
+			2014ko Gorobel Ibialdian parte hartu ahal izateko, web gune honetan
+			erregistratu behar da. Ondoren diru-sarrera egin behar da, 4 €-koa
+			bazkidea edo federatua bazara edo 6 €-koa ez bazara ez bazkidea ez
+			federatua, kontu-zenbaki hauetakoren batean: 
+			</span></p>
+			<p><span class="es">
+			Para participar en la marcha Gorobel Ibilaldia 2014, es
+			imprescindible realizar el registro en esta página web y
+			posteriormente realizar el ingreso de 4 € (si eres socio/a o
+			federado/a) o de 6 € (en caso de no ser ni socio/a ni federado/a)
+			en cualquiera de los siguientes números de cuenta:
+			</span></p>
+			<ul>
+				<li><span class="eu">Laboral Kutxa 3035 0089 12 0891003159</span></li>
+				<li><span class="eu">Kutxa Bank 2095 3258 21 1091116383</span></li>
+			</ul>
+			<p><span class="eu">
+			Diru-sarreraren ziurtagiria aurkeztu beharko da ibilaldian
+			parte hartzeko agiria jaso ahal izateko.
+			</span></p>
+			<p><span class="es">
+			El resguardo del ingreso deberá presentarse para recibir la
+			acreditación de participación en la marcha.
+			</span></p>
+			<p><strong><span class="eu">Inskripzio epea: Urriaren 29tik azaroaren 7ra.</span></strong></p>
+			<p><span class="eu">Plazo de inscripción: del 29 de octubre al 7 de noviembre.</span></p>
+			<label for="name"><span class="eu">Izena</span> / <span class="es">Nombre</span>:</label>
 			<input type="text" id="name" name="name" required>
-			<label for="first_lastname">Primer apellido:</label>
+			<label for="first_lastname"><span class="eu">Lehenengo abizena</span> / <span class="es">Primer Apellido</span>:</label>
 			<input type="text" id="firts_lastname" name="first_lastname" required>
-			<label for="second_lastname">Segundo apellido:</label>
+			<label for="second_lastname"><span class="eu">Bigarren abizena</span> / <span class="es">Segundo Apellido</span>:</label>
 			<input type="text" id="second_lastname" name="second_lastname" required>
-			<label for="id_number">NIF <span class="example">(por ejemplo, 12345678A)</span>:</label>
+			<label for="id_number"><span class="eu">IZF <span class="example">(adibidez, 123456789A)</span></span> / <span class="es">NIF <span class="example">(por ejemplo, 123456789A)</span></span>:</label>
 			<input type="text" id="id_number" name="id_number" required oninput="validate_id_number(this)">
-			<label for="re_id_number">Vuelva a introducir el NIF <span class="example">(por ejemplo, 12345678A)</span>:</label>
-			<input type="text" id="id_number" name="re_id_number" required oninput="check_id_number(this)">
-			<label for="settlement">Población:</label>
+			{% if config['HTML_RECHECK'] %}
+				<label for="re_id_number"><span class="eu">Errepikatu IZF</span> / <span class="es">Vuelva a introducir el NIF</span>:</label>
+				<input type="text" id="id_number" name="re_id_number" required oninput="check_id_number(this)">
+			{% endif %}
+			<label for="settlement"><span class="eu">Herria</span> / <span class="es">Localidad</span>:</label>
 			<input type="text" id="settlement" name=settlement required>
-			<label for="province">Provincia:</label>
+			<label for="province"><span class="eu">Probintzia</span> / <span class="es">Provincia</span>:</label>
 			<input type="text" id="province" name="province" list="provinces" required>
 			<datalist id="provinces">
 				<option value="Araba">
@@ -41,30 +60,47 @@
 				<option value="Nafarroa-Beherea">
 				<option value="Zuberoa">
 			</datalist>
-			<label for="sex">Sexo:</label>
+			<label for="sex"><span class="eu">Sexua</span> / <span class="es">Sexo</span>:</label>
 			<select id="sex" name="sex" required>
-				<option value="man" selected>Hombre</option>
-				<option value="woman">Mujer</option>
+				<option value="man" selected>Gizonezkoa / Hombre</option>
+				<option value="woman">Emakumezkoa / Mujer</option>
 			</select>
-			<label for="federated">Federado:</label>
+			<label for="federated"><span class="eu">Federatua</span> / <span class="es">Federado</span>:</label>
 			<select id="federated" name=federated required>
-				<option value="yes">Si</option>
-				<option value="no" selected>No</option>
+				<option value="no" selected>Ez / No</option>
+				<option value="yes">Bai / Sí</option>
 			</select>
-			<label for="club">Club de Montaña <span class="example">(solo si se pertenece a alguno)</span>:</label>
+			<label for="club"><span class="eu">Mendi taldea</span> / <span class="es">Club de montaña</span>:</label>
 			<input type="text" id="club" name="club">
-			<label for="email">E-mail:</label>
+			<label for="email"><span class="eu">Helbide elektronikoa</span> / <span class="es">Correo electrónico</span>:</label>
 			<input type="text" id="email" name="email" required oninput="validate_email(this)">
-			<label for="re_email">Vuelva a introducir el E-mail:</label>
-			<input type="text" id="re_email" name="re_email" required oninput="check_email(this)">
-			<label for="born_date">Fecha de nacimiento <span class="example">(por ejemplo, 31-12-1990)</span>:</label>
+			{% if config['HTML_RECHECK'] %}
+				<label for="re_email"><span class="eu">Errepikatu helbide elektronikoa</span> / <span class="es">Vuelva a introducir el correo electrónico</span>:</label>
+				<input type="text" id="re_email" name="re_email" required oninput="check_email(this)">
+			{% endif %}
+			<label for="born_date"><span class="eu">Jaioteguna <span class="example">(adibidez, 31-12-1990)</span></span> / <span class="es">Fecha de nacimiento (por ejemplo, 31-12-1990)</span>:</label>
 			<input type="text" id="born_date" name="born_date" required oninput="validate_born_date(this)">
-			<input type="submit" value="Enviar">
-			<p class="lopd">
+			<input type="submit" value="Bidali / Enviar">
+			<p class="lopd"><span class="eu">
+			Datuen Babeserako abenduaren 13ko 15/1999 Lege Organikoa betez,
+			Mendiko Lagunak mendi-taldeak honen berri ematen du: “Formulario
+			honen bidez emandako dau pertsonalak Mendiko Lagunak
+			mendi-taldearen titulartasuneko fitxategi batean sartuko dira, eta
+			fitxategi horren helburua 2014ko Gorobel Ibilaldia mendi-martxa
+			antolatu ahal izatea da. Bildutako datuak ezinbestekoak dira
+			aipatutako jarduera hori garatzeko. Formularioa bidaliz gero,
+			baimena ematen duzu zure datuak helburu horietarako lagatzeko.
+			Datuok ikusi, zuzendu, ezeztatu eta aurkaratzeko eskubideak erabil
+			ditzakezu, eta, horretarako, idazkia bidali beharko duzu helbide
+			honetara: Mendiko Lagunak mendi-taldea, José Picaza kalea 3, 01470
+			Amurrio (Araba). Idazki horretan izen-abizenak, eskaera zehatza,
+			jakinarazpenetarako helbidea, data, sinadura eta NAN edo
+			pasaporte-zenbakia adierazi beharko dituzu”.
+			</span></p>
+			<p class="lopd"><span class="es">
 			En cumplimiento de la Ley Orgánica 15/1999, de 13 de diciembre de
 			Protección de Datos de Carácter Personal (LOPD), Mendiko Lagunak
 			M.T. informa de las siguientes consideraciones:
-
 			"Los datos de carácter personal que se faciliten 
 			mediante este formulario serán incluidos en un
 			fichero titularidad de Mendiko Lagunak M.T., cuya finalidad es
@@ -73,14 +109,13 @@
 			desarrollo de dicha actividad. Con el envío del
 			formulario, autoriza la cesión de sus datos para los fines
 			indicados.
-
 			Puede ejercitar sus derechos de acceso, rectificación, cancelación
 			y oposición dirigiéndose mediante comunicación escrita al siguiente
 			domicilio Mendiko Lagunak M.T., c/Jose Pikatza , 3. 01470
 			Amurrio (Araba), dicha comunicación deberá incluir nombre y apellidos,
 			petición en que se concreta la solicitud, dirección a efectos de
 			notificaciones, fecha, firma y DNI o pasaporte."
-			</p>
+			</span></p>
 		</form>
 {% endblock %}
 {% block footer %}

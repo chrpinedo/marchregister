@@ -2,12 +2,16 @@ body {
 	font-family: serif; 
 	font-size: 100%;
 	background-color: #ffff99;
+	background: url(gorobel-2014-kartela.jpg);
+	background-repeat: repeat-y;
+	background-position: center top;
 }
 div.page {
 	width:700px;
 	margin: 20px auto;
 	padding: 20px;
 	background-color: #F8F8F8;
+	opacity: 0.95;
 }
 header {
 	text-align: center;
@@ -47,6 +51,9 @@ div.flashes div.error {
 	font-weight: bold;
 	text-align: center;
 	padding: 20px;
+}
+span.es {
+	color: #606060;
 }
 /* Form */
 form.register input:invalid { 

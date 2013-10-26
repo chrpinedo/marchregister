@@ -26,7 +26,8 @@ DEBUG = True
 SECRET_KEY = '123secret456key'
 USERNAME = 'admin'
 PASSWORD = 'admin'
-HTML_TITLE = 'Gorobel Ibilaldia 2014'
+HTML_TITLE = 'XXVII. Gorobel Ibilaldia 2014'
+HTML_RECHECK = False
 # end of the configuration
 
 app = Flask(__name__)
@@ -134,8 +135,7 @@ def register():
         matches = query_db('select * from entries where id_number = ?', 
                            [entry['id_number']])
         if matches:
-            flash(u'El usuario ya esta registrado con número de dorsal %s' %
-                    (matches[0]['number']), 'error')
+            flash(u'IZF Iadanik erregistratuta %s patruila zenbakiarekin. NIF ya registrado con número de patrulla %s' % (matches[0]['number'],matches[0]['number']), 'error')
             return render_template('registered.html')
         cur = g.db.execute('insert into entries (name, first_lastname, '
                      'second_lastname, id_number, settlement, province, sex, '
@@ -148,7 +148,7 @@ def register():
         g.db.commit()
         matches = query_db('select * from entries where id_number = ?', 
                            [entry['id_number']])
-        flash(u'Registrado con número de dorsal %s' % (matches[0]['number']))
+        flash(u'Inskripzioa eginda %s patruila zenbakiarekin. Registrado con número de patrulla %s.' % (matches[0]['number'],matches[0]['number']))
         return render_template('registered.html')
 
 @app.route('/list')
