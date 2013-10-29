@@ -18,7 +18,7 @@ DATABASE_SQL = 'marchregister.sql'
 DATABASE_TABLE = 'entries'
 DATABASE_FIELDS = { 'entries' : ['number', 'name', 'first_lastname',
                                  'second_lastname', 'id_number', 'settlement',
-                                 'province', 'sex', 'federated', 'club', 
+                                 'province', 'sex', 'federated', 'club',
                                  'email', 'born_date', 'registry_date',
                                  'registry_time']}
 CSV_FILE = 'registries.csv'
@@ -26,7 +26,7 @@ DEBUG = True
 SECRET_KEY = '123secret456key'
 USERNAME = 'admin'
 PASSWORD = 'admin'
-HTML_TITLE = 'XXVII. Gorobel Ibilaldia 2014'
+HTML_TITLE = 'XXVII. Gorobel Ibilaldia'
 HTML_RECHECK = False
 # end of the configuration
 
@@ -132,7 +132,7 @@ def register():
         return render_template('register.html')
     elif request.method == 'POST':
         entry = normalize_register()
-        matches = query_db('select * from entries where id_number = ?', 
+        matches = query_db('select * from entries where id_number = ?',
                            [entry['id_number']])
         if matches:
             flash(u'IZF Iadanik erregistratuta %s patruila zenbakiarekin. NIF ya registrado con número de patrulla %s' % (matches[0]['number'],matches[0]['number']), 'error')
@@ -146,7 +146,7 @@ def register():
                      entry['province'], entry['sex'], entry['federated'],
                      entry['club'], entry['email'], entry['born_date']])
         g.db.commit()
-        matches = query_db('select * from entries where id_number = ?', 
+        matches = query_db('select * from entries where id_number = ?',
                            [entry['id_number']])
         flash(u'Inskripzioa eginda %s patruila zenbakiarekin. Registrado con número de patrulla %s.' % (matches[0]['number'],matches[0]['number']))
         return render_template('registered.html')
