@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 # all the imports
-import csv
 import re
 import sqlite3
 import tempfile
 from contextlib import closing
 from flask import Flask, request, session, g, redirect, url_for, \
                   abort, render_template, flash, send_file
+from dictunicodewriter import DictUnicodeWriter
 
 # default configuration
 # this configuration options may be overwritten by a external configuration
@@ -25,7 +25,7 @@ CSV_FILE = 'registries.csv'
 DEBUG = True
 SECRET_KEY = '123secret456key'
 USERNAME = 'admin'
-PASSWORD = 'admin'
+PASSWORD = '10mendiko11lagunak2013'
 HTML_TITLE = 'XXVII. Gorobel Ibilaldia'
 HTML_RECHECK = False
 # end of the configuration
@@ -164,18 +164,22 @@ def download():
     elif request.method == 'POST':
         if request.form['username'] == app.config['USERNAME'] and \
            request.form['password'] == app.config['PASSWORD']:
-            csvf = open(app.config['CSV_FILE'], 'w')
-            wr = csv.DictWriter(csvf, app.config['DATABASE_FIELDS']['entries'])
-            wr.writerow(dict(zip(app.config['DATABASE_FIELDS']['entries'],
-                                 app.config['DATABASE_FIELDS']['entries'])))
+            csvf = open(app.config['CSV_FILE'], 'wb')
+            csvf.write(u'\ufeff'.encode('utf8'))
+            wr = DictUnicodeWriter(csvf,
+                                   app.config['DATABASE_FIELDS']['entries'])
+            wr.writeheader()
             entries = query_db('select * from entries')
             for entry in entries:
                 temp = {}
                 for field in app.config['DATABASE_FIELDS']['entries']:
-                    temp[field] = entry[field]
+                    if type(entry[field]) is int:
+                        temp[field] = str(entry[field])
+                    else:
+                        temp[field] = entry[field]
                 wr.writerow(temp)
             csvf.close()
-            csvf = open(app.config['CSV_FILE'], 'r')
+            csvf = open(app.config['CSV_FILE'], 'rb')
             return send_file(csvf, as_attachment=True,
                              attachment_filename="registros.csv")
         else:
