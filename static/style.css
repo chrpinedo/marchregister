@@ -1,5 +1,5 @@
-body { 
-	font-family: serif; 
+body {
+	font-family: serif;
 	font-size: 100%;
 	background-color: #ffff99;
 	background: url(gorobel-2014-kartela.jpg);
@@ -56,7 +56,7 @@ span.es {
 	color: #606060;
 }
 /* Form */
-form.register input:invalid { 
+form.register input:invalid {
 	background: #FFE4E1;
 }
 form.register input:required {
