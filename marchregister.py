@@ -28,6 +28,7 @@ USERNAME = 'admin'
 PASSWORD = '10mendiko11lagunak2013'
 HTML_TITLE = 'XXVII. Gorobel Ibilaldia'
 HTML_RECHECK = False
+REGISTER = False
 # end of the configuration
 
 app = Flask(__name__)
@@ -128,6 +129,9 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if not app.config['REGISTER']:
+        flash(u'Inskripzio epea itxita. Plazo de inscripción cerrado.', 'error')
+        return render_template('registered.html')
     if request.method == 'GET':
         return render_template('register.html')
     elif request.method == 'POST':
@@ -135,7 +139,7 @@ def register():
         matches = query_db('select * from entries where id_number = ?',
                            [entry['id_number']])
         if matches:
-            flash(u'IZF Iadanik erregistratuta %s patruila zenbakiarekin. NIF ya registrado con número de patrulla %s' % (matches[0]['number'],matches[0]['number']), 'error')
+            flash(u'IZF Iadanik erregistratuta %s patruila zenbakiarekin. NIF ya registrado con número de patrulla %s.' % (matches[0]['number'],matches[0]['number']), 'error')
             return render_template('registered.html')
         cur = g.db.execute('insert into entries (name, first_lastname, '
                      'second_lastname, id_number, settlement, province, sex, '
