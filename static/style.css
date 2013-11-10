@@ -1,13 +1,9 @@
 body {
 	font-family: serif;
 	font-size: 100%;
-	background-color: #ffff99;
-	background: url(gorobel-2014-kartela.jpg);
-	background-repeat: repeat-y;
-	background-position: center top;
 }
 div.page {
-	width:700px;
+	width:600px;
 	margin: 20px auto;
 	padding: 20px;
 	background-color: #F8F8F8;
